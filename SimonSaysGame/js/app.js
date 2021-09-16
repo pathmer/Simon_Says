@@ -1,92 +1,93 @@
 
-function startGame(){
+let playerTry = 5;
+let colors = ["green", "red", "yellow", "blue"];
+let classes = ["btn btn-success", "btn btn-danger", "btn btn-warning", "btn btn-primary"];
+let audioArr = [];
+let simonArr = [];
+audioArr.push(new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"));
+audioArr.push(new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"));
+audioArr.push(new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"));
+audioArr.push(new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"));
+
+document.getElementById("green").disabled = true;
+document.getElementById("red").disabled = true;
+document.getElementById("yellow").disabled = true;
+document.getElementById("blue").disabled = true;
+
+async function startGame(){
 	let playerInput = true;
-	let simonArr = [];
+	let level = 1;
+	let endgame = false;
 		
 	while(playerInput){
-		let level = 1;
-		let random = (Math.floor(Math.random()*4));
-		console.log(random);
-		//play corresponding color/sound
-		simonArr.push(random);
-		
-		for(let i = 0; i < simonArr.length; i++){
-			//play audio
-			console.log("starting light/audio sequence");
-            let audio;
-			if(simonArr[i]==0)
-			{
-				// 0 = green
-				//play audio 0;
-                audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")
-			}			
-			if(simonArr[i]==1)
-			{
-				// 1 = red
-				//play audio 1;
-                audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")
-			}
-			if(simonArr[i]==2)
-			{
-				// 2 = yellow
-				//play audio 2;
-                audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
-			}
-			if(simonArr[i]==3)
-			{
-				// 3 = blue 
-				//play audio 3;
-                audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3")
-			}
-            audio.play();
+		if (endgame == true) {
+			break;
 		}
+
+		// generate next button
+		for (let i = 0; i < level; i++) {
+			let random = (Math.floor(Math.random()*4));
+			simonArr.push(random);
+		}
+
+		// computer round
+		document.getElementById("green").disabled = true;
+		document.getElementById("red").disabled = true;
+		document.getElementById("yellow").disabled = true;
+		document.getElementById("blue").disabled = true;
+
+		await new Promise(resolve => setTimeout(resolve, 500));
+
+		console.log("starting light/audio sequence");
+
+		for(let i = 0; i < level; i++){
+			await new Promise(resolve => setTimeout(resolve, 200));
+			playbutton(simonArr[i]);
+			await new Promise(resolve => setTimeout(resolve, 700));
+		}
+
+		document.getElementById("green").disabled = false;
+		document.getElementById("red").disabled = false;
+		document.getElementById("yellow").disabled = false;
+		document.getElementById("blue").disabled = false;
 
 		//player round
+		playerTry = 5; // valid choices are 0-3, so 5 creates a wait loop until a button is pushed
+
 		for(let i=0; i< level; i++){
-			// wait for player input
 			console.log("starting player input sequence");
+			while (playerTry == 5) {
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+
+			if (playerTry != simonArr[i]) {
+				console.log("wrong");
+				// play losing sound
+				endgame = true;
+				break;
+			}
+			else {
+				console.log("correct");
+				playbutton(simonArr[i]);
+				playerTry = 5; // resets the player button choice for the wait loop
+			}
 		}
 		level++;
-		//code for player input'
-		//code to check player input is valid
-		break;
 	}
-}
-function audio(input){
-    let audio;
-    if(input==0)
-    {
-        // 0 = green
-        //play audio 0;
-        audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")
-        audio.play();
-    }			
-    else if(input==1)
-    {
-        // 1 = red
-        //play audio 1;
-        audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")
-        audio.play();
-    }
-    else if(input==2)
-    {
-        // 2 = yellow
-        //play audio 2;
-        audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
-        audio.play();
-    }
-    else if(input==3)
-    {
-        // 3 = blue 
-        //play audio 3;
-        audio= new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3")
-        audio.play();
-    }
-    else {
-        //error
-        console.log("invalid input for function audio");
-    }
-
+	console.log("You Lose");
 }
 
 
+function playerinput(c) {
+	playerTry = c; // sets the player button choice
+}
+
+// flashes the button and plays it's sound
+async function playbutton(rightbutton) {
+	console.log(colors[rightbutton]);
+	await new Promise(resolve => setTimeout(resolve, 300));
+	document.getElementById(colors[rightbutton]).className = "btn btn-secondary";
+	audioArr[rightbutton].play();
+	await new Promise(resolve => setTimeout(resolve, 300));
+	document.getElementById(colors[rightbutton]).className = classes[rightbutton];
+}
