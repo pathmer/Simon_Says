@@ -22,29 +22,43 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand center" >
           
-            <!-- <img
+            <img
               src="https://www.geekalerts.com/u/Classic-Simon-Game.jpg"
               alt="Simon Says Game"
               width="500"
               height="240"
-              class="center d-inline-block align-text-top"
-            /> -->
+              class="center "
+            /> 
         
-           <h1>Welcome to Repeat After Me</h1>
+           <h1>Simon Says Game!</h1>
         </a>
       </div>
     </nav>
+<div class="instructions center">
 
+  <h2> How to Play</h2>
+  <ul> 
+  <li>Simon will give the first signal. One color tile will light up, accompanined by a tone.  </li>
+  <li>Repeat the signal by touching the selecting the same color tile. </li>
+  <li>Simon will repeat the first signal and then add one more. </li>
+  <li>Repeat those two signals in the same order. </li>
+  <li>Simon will continue to play the sequence and add one.</li>
+  <li>Continue to repeat Simon for as long as you can.</li>
+  <li>If you fail to complete the sequence in the correct order the game will end.</li>
+
+</ul>
+</div>
     <div>
       <div class="circle center">
-        <button type="button-1" class="btn btn-success" id="green" onclick="playerinput(0)"></button>
-        <button type="button-2" class="btn btn-danger" id="red" onclick="playerinput(1)"></button><br />
         <button type="button-3" class="btn btn-warning" id="yellow" onclick="playerinput(2)"></button>
+        <button type="button-1" class="btn btn-success" id="green" onclick="playerinput(0)"></button>
         <button type="button-4" class="btn btn-primary" id="blue" onclick="playerinput(3)"></button>
+        <button type="button-2" class="btn btn-danger" id="red" onclick="playerinput(1)"></button><br />
+        
         <div class="start">
-          <button type="button" class="button btn-secondary" onclick="startGame()">
+          <button type="button" class="button innercircle " onclick="startGame()">
             Click here to start!
           </button>
         </div>

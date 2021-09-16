@@ -6,9 +6,10 @@
     color: Black;
     text-align: center;
   }
-  body {
-    background-color: lightblue;
-  }
+
+.instructions{
+  margin-top: 50px;
+}
 
   .center {
     display: block;
@@ -18,18 +19,66 @@
   }
 
   .btn {
-    margin-top: 80px;
+    margin-top: 15px;
     margin-right: 10px;
-    margin-left: 80px;
-    margin-bottom: 0px;
-    height: 250px;
-    width: 250px;
+    margin-left: 50px;
+    margin-bottom: 90px;
+    height: 200px;
+    width: 200px;
   }
+
   .circle {
+    margin-top: 50px;
+    position: absolute;
     height: 800px;
     width: 800px;
-
-    background-color: #555;
+   background-color: #555;
     border-radius: 50%;
+    left: 25vw;
   }
+
+  .innercircle {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 50%;
+    top: 250px;
+    left:250px;
+  }
+
+  .btn-danger{
+    width: 325px;
+    height: 325px;
+    background: red;
+    border-radius: 0 0 325px 0;
+    -moz-border-radius: 0 0 325px 0;
+    -webkit-border-radius: 0 0 325px 0;
+
+}
+.btn-primary{
+     width: 325px;
+     height: 325px;
+     background: blue;
+     border-radius: 0 0 0 325px;
+     -moz-border-radius: 0 0 0 325px;
+     -webkit-border-radius: 0 0 0 325px;
+}
+.btn-success{
+     width: 325px;
+     height: 325px;
+     background: green;
+     border-radius: 0 325px 0 0;
+     -moz-border-radius: 0 325px 0 0;
+     -webkit-border-radius: 0 325px 0 0;
+}
+.btn-warning{
+     width: 325px;
+     height: 325px;
+     background: orange;
+     border-radius: 325px 0 0 0;
+     -moz-border-radius: 325px 0 0 0;
+     -webkit-border-radius: 325px 0 0 0;
+}
  
